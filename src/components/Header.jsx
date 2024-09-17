@@ -2,20 +2,29 @@ import React from "react";
 import SearchBar from "./SearchBar";
 import Account from "./Account";
 import Navigator from "./Navigator";
+import { Link } from "react-router-dom";
+import { useState } from "react";
+import fontawesome from "@fortawesome/fontawesome";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faNewspaper } from "@fortawesome/fontawesome-free-solid";
 
-const Header = () => {
+fontawesome.library.add(faNewspaper);
+
+const Header = ({ setSearch }) => {
   return (
     <header className="header">
-      <a href="/">
-        <img className="header-image" src="news-logo.png" alt="logo" />
-      </a>
+      <Link to="/">
+        <FontAwesomeIcon icon="fa-newspaper" className="header-image" />
+      </Link>
+
       <div className="header-centre">
-        <SearchBar />
+        <SearchBar setSearch={setSearch} />
         <Navigator className="navigator" />
       </div>
-      <a href="">
+
+      <Link to="/users/butter_bridge">
         <Account className="header-Account" />
-      </a>
+      </Link>
     </header>
   );
 };

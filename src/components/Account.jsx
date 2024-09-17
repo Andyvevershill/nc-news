@@ -1,13 +1,17 @@
+import fontawesome from "@fortawesome/fontawesome";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUser } from "@fortawesome/fontawesome-free-solid";
+import { Link } from "react-router-dom";
+fontawesome.library.add(faUser);
+
 const Account = () => {
   return (
     <div className="img-container">
-      <img
-        className="header-image basket-image"
-        src="sign-in.jpg"
-        alt="sign-in-image"
-      />
-      <div className="top-left">
-        <b>input</b>
+      <Link to="/">
+        <FontAwesomeIcon icon="fa-solid fa-user" className="header-image" />
+      </Link>
+      <div className="username-text">
+        <b>butter_bridge</b>
       </div>
     </div>
   );
