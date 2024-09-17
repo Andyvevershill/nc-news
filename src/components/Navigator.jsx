@@ -1,15 +1,19 @@
+import { Link } from "react-router-dom";
+
 const Navigator = () => {
   return (
-    <ul class="nav-list">
-      <li>
-        <button className="navigator-item">Cooking</button>
-      </li>
-      <li>
-        <button className="navigator-item">Coding</button>
-      </li>
-      <li>
-        <button className="navigator-item">Football</button>
-      </li>
+    <ul className="nav-list">
+      <Link to="/" className="navigator-item">
+        Cooking
+      </Link>
+
+      <Link to="/" className="navigator-item">
+        Coding
+      </Link>
+
+      <Link to="/" className="navigator-item">
+        Football
+      </Link>
     </ul>
   );
 };

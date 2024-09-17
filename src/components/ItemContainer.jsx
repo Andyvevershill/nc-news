@@ -1,5 +1,5 @@
 import ItemCard from "./ItemCard";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 
 const ItemContainer = ({ search, articles, setArticles }) => {
   const [isLoading, setIsLoading] = useState(false);
@@ -13,12 +13,10 @@ const ItemContainer = ({ search, articles, setArticles }) => {
       "https://project1-be-nc-news.onrender.com/api/articles/"
     );
 
-    url.searchParams.set("search", search);
+    // url.searchParams.set("search", search);
 
     fetch(url.toString())
-      .then((response) => {
-        return response.json();
-      })
+      .then((response) => response.json())
       .then((data) => {
         setIsLoading(false);
         setIsError(false);
@@ -30,14 +28,25 @@ const ItemContainer = ({ search, articles, setArticles }) => {
         setIsLoading(false);
         setIsError(true);
       });
-  }, [search]);
+  }, []);
+
+  const filteredArticles = useMemo(() => {
+    const upperCaseSearch = search.toUpperCase();
+    return articles?.filter(
+      (article) =>
+        article.title.toUpperCase().includes(upperCaseSearch) ||
+        article.author.toUpperCase().includes(upperCaseSearch) ||
+        article.topic.toUpperCase().includes(upperCaseSearch)
+    );
+  }, [articles, search]);
+
   if (isLoading) return <p>Loading articles...</p>;
   if (isError) return <p>Error fetching article details</p>;
 
   return (
     <ul>
       <div className="container">
-        {articles.map((article) => {
+        {filteredArticles.map((article) => {
           return <ItemCard article={article} key={article.article_id} />;
         })}
       </div>
