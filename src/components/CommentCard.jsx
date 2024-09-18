@@ -1,4 +1,5 @@
 import moment from "moment";
+import ArticleVoting from "./ArticleVoting";
 
 const CommentCard = ({ comment }) => {
   return (
@@ -9,8 +10,10 @@ const CommentCard = ({ comment }) => {
       </p>
       <p>{comment.body}</p>
       <p>
-        <b>Votes: </b>
-        {comment.votes}
+        <ArticleVoting
+          articleId={comment.article_id}
+          initialVotes={comment.votes}
+        />
       </p>
     </div>
   );

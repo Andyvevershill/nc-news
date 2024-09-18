@@ -22,9 +22,8 @@ const ItemContainer = ({ search, articles, setArticles }) => {
         setIsError(false);
         // if condition is null or undefined, use the empty array
         setArticles(data.articles ?? []);
-        console.log(data);
       })
-      .catch((err) => {
+      .catch(() => {
         setIsLoading(false);
         setIsError(true);
       });
