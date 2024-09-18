@@ -1,12 +1,14 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import moment from "moment";
+import CommentContainer from "./CommentContainer";
 
 const Article = () => {
   const { article_id } = useParams();
   const [article, setArticle] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
+  const [comments, setComments] = useState([]);
 
   useEffect(() => {
     setIsLoading(true);
@@ -16,12 +18,11 @@ const Article = () => {
         return article.json();
       })
       .then((response) => {
-        console.log(response);
         setIsLoading(false);
         setIsError(false);
         setArticle(response.article);
       })
-      .catch((err) => {
+      .catch(() => {
         setIsLoading(false);
         setIsError(true);
       });
@@ -49,6 +50,7 @@ const Article = () => {
           <p className="body-text">{article.body}</p>
         </div>
       </section>
+      <CommentContainer article_id={article_id} />
     </>
   );
 };
