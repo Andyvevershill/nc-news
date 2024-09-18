@@ -50,7 +50,9 @@ const Article = () => {
           <p className="body-text">{article.body}</p>
         </div>
       </section>
-      <CommentContainer article_id={article_id} />
+      <section>
+        <CommentContainer article_id={article_id} />
+      </section>
     </>
   );
 };

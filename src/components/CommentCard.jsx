@@ -2,6 +2,10 @@ import moment from "moment";
 import ArticleVoting from "./ArticleVoting";
 
 const CommentCard = ({ comment }) => {
+  if (comment.author == "grumpy19") {
+    comment.author = "Me";
+  }
+
   return (
     <div className="comment-card">
       <p>

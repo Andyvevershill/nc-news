@@ -10,7 +10,7 @@ const SearchBar = ({ setSearch }) => {
       <form className="form" onSubmit={handleSubmit}>
         <input type="text" placeholder="Search keyword..." name="search" />
         <button className="searchbutton" type="submit">
-          🔎
+          🔍
         </button>
       </form>
     </div>
