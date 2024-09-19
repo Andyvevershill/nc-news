@@ -66,7 +66,7 @@ const PostComment = ({ article_id, addNewComment }) => {
           ></textarea>
         </label>
         <button className="post-button" type="submit">
-          {isSubmitting ? "Posting comment..." : "Post comment"}
+          {isSubmitting ? <b>Posting comment... </b> : <b>Post comment</b>}
         </button>
       </form>
     </div>

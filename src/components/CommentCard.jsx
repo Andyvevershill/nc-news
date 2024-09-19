@@ -5,8 +5,10 @@ const CommentCard = ({ comment, onDelete }) => {
   const isOwnComment = comment.author === "grumpy19";
   const displayAuthor = isOwnComment ? "Me" : comment.author;
 
+  const className = comment.votes > 0 ? "comment-card-plus" : "comment-card";
+
   return (
-    <div className="comment-card">
+    <div className={className}>
       <p>
         <b>{displayAuthor} </b>
         {moment(comment.created_at).format("DD/MM/YYYY")}
@@ -18,9 +20,9 @@ const CommentCard = ({ comment, onDelete }) => {
           initialVotes={comment.votes}
         />
       </p>
-      {comment.author === "grumpy19" ? (
+      {comment.author === "grumpy19" && (
         <button onClick={() => onDelete(comment.comment_id)}>Delete</button>
-      ) : null}
+      )}
     </div>
   );
 };

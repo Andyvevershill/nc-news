@@ -4,6 +4,7 @@ import Article from "./components/Article";
 import ItemContainer from "./components/ItemContainer";
 import { useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import TopicPage from "./components/TopicPage";
 
 function App() {
   const [search, setSearch] = useState("");
@@ -29,6 +30,10 @@ function App() {
           }
         />
         <Route path="/:article_id" element={<Article />} />
+        <Route
+          path="/topics/:topic"
+          element={<TopicPage setArticles={setArticles} articles={articles} />}
+        />
       </Routes>
     </BrowserRouter>
   );

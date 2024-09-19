@@ -18,6 +18,7 @@ const Header = ({ setSearch }) => {
       </Link>
 
       <div className="header-centre">
+        <h1 className="header-text">Welcome to NC News</h1>
         <SearchBar setSearch={setSearch} />
         <Navigator className="navigator" />
       </div>
