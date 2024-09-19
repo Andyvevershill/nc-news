@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import CommentCard from "./CommentCard";
+import PostComment from "./PostComment";
 
 const CommentContainer = ({ article_id }) => {
   const [isLoading, setIsLoading] = useState(false);
@@ -12,7 +13,6 @@ const CommentContainer = ({ article_id }) => {
     )
       .then((response) => response.json())
       .then((response) => {
-        console.log(response);
         setComments(response.comments);
       })
       .catch(() => {
@@ -21,25 +21,43 @@ const CommentContainer = ({ article_id }) => {
       });
   }, [article_id]);
 
-  if (isError) return <p>This is awkward, I cant load the comments...</p>;
+  const addNewComment = (newComment) => {
+    setComments((prevComments) => [newComment, ...prevComments]);
+  };
+
+  const handleDeleteComment = (commentId) => {
+    fetch(
+      `https://project1-be-nc-news.onrender.com/api/comments/${commentId}`,
+      { method: "DELETE" }
+    ).then((response) => {
+      if (response.status === 204) {
+        setComments((prevComments) =>
+          prevComments.filter((comment) => comment.comment_id !== commentId)
+        );
+      } else {
+        throw new Error("failed to delete comment, try again later");
+      }
+    });
+  };
 
   return (
-    <>
-      <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-      ></meta>
-      <section className="comments-section">
-        <h3>Take a read through the comments below:</h3>
-        {comments.length === 0 ? (
-          <p>Sorry about that, no comments here yet </p>
-        ) : (
-          comments.map((comment) => (
-            <CommentCard key={comment.comment_id} comment={comment} />
+    <section className="comments-section">
+      <PostComment article_id={article_id} addNewComment={addNewComment} />
+      <h3>Take a read through the comments below:</h3>
+      {comments.length === 0 ? (
+        <p>Sorry about that, no comments here yet... </p>
+      ) : (
+        comments
+          .filter((comment) => comment && comment.comment_id)
+          .map((comment) => (
+            <CommentCard
+              key={comment.comment_id}
+              comment={comment}
+              onDelete={handleDeleteComment}
+            />
           ))
-        )}
-      </section>
-    </>
+      )}
+    </section>
   );
 };
 

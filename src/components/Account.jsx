@@ -11,7 +11,7 @@ const Account = () => {
         <FontAwesomeIcon icon="fa-solid fa-user" className="header-image" />
       </Link>
       <div className="username-text">
-        <b>butter_bridge</b>
+        <b>grumpy19</b>
       </div>
     </div>
   );

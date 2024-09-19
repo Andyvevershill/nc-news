@@ -9,7 +9,7 @@ import {
 
 fontawesome.library.add(faHeart, faThumbsUp, faThumbsDown);
 
-const ArticleVoting = ({ articleId, initialVotes, comment }) => {
+const ArticleVoting = ({ articleId, initialVotes }) => {
   const [votes, setVotes] = useState(initialVotes || 0);
   const [error, setError] = useState(null);
   const [isVoting, setIsVoting] = useState(false);
@@ -44,16 +44,14 @@ const ArticleVoting = ({ articleId, initialVotes, comment }) => {
 
   return (
     <section>
-      <p>
-        <FontAwesomeIcon className="votes" icon="fa-solid fa-heart" />
-        {votes}
-        <button onClick={() => handleVote(1)} disabled={isVoting}>
-          <FontAwesomeIcon className="votes-up" icon="fa-thumbs-up" />
-        </button>
-        <button onClick={() => handleVote(-1)} disabled={isVoting}>
-          <FontAwesomeIcon className="votes-down" icon="fa-thumbs-down" />
-        </button>
-      </p>
+      <FontAwesomeIcon className="votes" icon="fa-solid fa-heart" />
+      {votes}
+      <button onClick={() => handleVote(1)} disabled={isVoting}>
+        <FontAwesomeIcon className="votes-up" icon="fa-thumbs-up" />
+      </button>
+      <button onClick={() => handleVote(-1)} disabled={isVoting}>
+        <FontAwesomeIcon className="votes-down" icon="fa-thumbs-down" />
+      </button>
     </section>
   );
 };
