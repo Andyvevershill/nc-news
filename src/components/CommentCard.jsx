@@ -1,15 +1,14 @@
 import moment from "moment";
 import ArticleVoting from "./ArticleVoting";
 
-const CommentCard = ({ comment }) => {
-  if (comment.author == "grumpy19") {
-    comment.author = "Me";
-  }
+const CommentCard = ({ comment, onDelete }) => {
+  const isOwnComment = comment.author === "grumpy19";
+  const displayAuthor = isOwnComment ? "Me" : comment.author;
 
   return (
     <div className="comment-card">
       <p>
-        <b>{comment.author} </b>
+        <b>{displayAuthor} </b>
         {moment(comment.created_at).format("DD/MM/YYYY")}
       </p>
       <p>{comment.body}</p>
@@ -19,6 +18,9 @@ const CommentCard = ({ comment }) => {
           initialVotes={comment.votes}
         />
       </p>
+      {comment.author === "grumpy19" ? (
+        <button onClick={() => onDelete(comment.comment_id)}>Delete</button>
+      ) : null}
     </div>
   );
 };

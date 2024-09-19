@@ -13,7 +13,6 @@ const CommentContainer = ({ article_id }) => {
     )
       .then((response) => response.json())
       .then((response) => {
-        console.log(response);
         setComments(response.comments);
       })
       .catch(() => {
@@ -26,6 +25,21 @@ const CommentContainer = ({ article_id }) => {
     setComments((prevComments) => [newComment, ...prevComments]);
   };
 
+  const handleDeleteComment = (commentId) => {
+    fetch(
+      `https://project1-be-nc-news.onrender.com/api/comments/${commentId}`,
+      { method: "DELETE" }
+    ).then((response) => {
+      if (response.status === 204) {
+        setComments((prevComments) =>
+          prevComments.filter((comment) => comment.comment_id !== commentId)
+        );
+      } else {
+        throw new Error("failed to delete comment, try again later");
+      }
+    });
+  };
+
   return (
     <section className="comments-section">
       <PostComment article_id={article_id} addNewComment={addNewComment} />
@@ -36,7 +50,11 @@ const CommentContainer = ({ article_id }) => {
         comments
           .filter((comment) => comment && comment.comment_id)
           .map((comment) => (
-            <CommentCard key={comment.comment_id} comment={comment} />
+            <CommentCard
+              key={comment.comment_id}
+              comment={comment}
+              onDelete={handleDeleteComment}
+            />
           ))
       )}
     </section>
