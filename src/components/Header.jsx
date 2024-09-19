@@ -3,7 +3,6 @@ import SearchBar from "./SearchBar";
 import Account from "./Account";
 import Navigator from "./Navigator";
 import { Link } from "react-router-dom";
-import { useState } from "react";
 import fontawesome from "@fortawesome/fontawesome";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faNewspaper } from "@fortawesome/fontawesome-free-solid";

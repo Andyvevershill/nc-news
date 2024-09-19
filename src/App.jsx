@@ -2,9 +2,10 @@ import "./App.css";
 import Header from "./components/Header";
 import Article from "./components/Article";
 import ItemContainer from "./components/ItemContainer";
-import { useState } from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
 import TopicPage from "./components/TopicPage";
+import LocationWatcher from "./components/LocationWatcher";
 
 function App() {
   const [search, setSearch] = useState("");
@@ -17,6 +18,7 @@ function App() {
         content="width=device-width, initial-scale=1"
       ></meta>
       <Header setSearch={setSearch} />
+      <LocationWatcher setArticles={setArticles} />
       <Routes>
         <Route
           path="/"
@@ -32,7 +34,7 @@ function App() {
         <Route path="/:article_id" element={<Article />} />
         <Route
           path="/topics/:topic"
-          element={<TopicPage setArticles={setArticles} articles={articles} />}
+          element={<TopicPage articles={articles} setArticles={setArticles} />}
         />
       </Routes>
     </BrowserRouter>

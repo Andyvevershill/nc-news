@@ -10,16 +10,21 @@ const TopicPage = ({ setArticles, articles }) => {
   useEffect(() => {
     setIsLoading(true);
     setIsError(false);
+
     fetch(
       `https://project1-be-nc-news.onrender.com/api/articles?topic=${topic}`
     )
-      .then((response) => response.json())
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
       .then((data) => {
         setIsLoading(false);
-        setIsError(false);
         setArticles(data.articles);
       })
-      .catch(() => {
+      .catch((err) => {
         setIsLoading(false);
         setIsError(true);
       });
