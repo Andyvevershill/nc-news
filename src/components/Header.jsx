@@ -2,7 +2,7 @@ import React from "react";
 import SearchBar from "./SearchBar";
 import Account from "./Account";
 import Navigator from "./Navigator";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import fontawesome from "@fortawesome/fontawesome";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faNewspaper } from "@fortawesome/fontawesome-free-solid";
@@ -10,9 +10,16 @@ import { faNewspaper } from "@fortawesome/fontawesome-free-solid";
 fontawesome.library.add(faNewspaper);
 
 const Header = ({ setSearch }) => {
+  const navigate = useNavigate();
+
+  const handleHomeClick = () => {
+    setSearch("");
+    navigate("/");
+  };
+
   return (
     <header className="header">
-      <Link to="/">
+      <Link to="/" onClick={handleHomeClick}>
         <FontAwesomeIcon icon="fa-newspaper" className="header-image" />
       </Link>
 

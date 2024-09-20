@@ -10,13 +10,11 @@ body {
   color: white;
 }
 
-/* Header styling */
 header {
   padding: 20px;
   background-color: #f8f9fa;
 }
 
-/* Ensure headings and paragraphs use the same font */
 h1,
 h2,
 h3,
@@ -38,7 +36,6 @@ p {
   padding: 10px;
 }
 
-/* Header styling */
 .header {
   display: flex;
   justify-content: space-between;
@@ -96,13 +93,6 @@ p {
   max-width: 600px;
 }
 
-.navigator {
-  margin: 50px;
-  display: flex;
-  justify-content: space-around;
-  width: 100%;
-}
-
 .header-Account {
   font-size: 20px;
   transition: transform 0.3s ease;
@@ -133,7 +123,6 @@ p {
 }
 
 .navigator-item {
-  text-decoration: none;
   color: white;
   font-weight: 500;
   padding: 10px 20px;
@@ -171,6 +160,11 @@ p {
   box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
 }
 
+.sort-controls {
+  text-align: center;
+  padding-top: 10px;
+}
+
 .searchbutton {
   padding: 10px;
   border: none;
@@ -186,7 +180,6 @@ p {
   background-color: #0056b3;
 }
 
-/* Container for the articles */
 .container {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -194,41 +187,69 @@ p {
   margin: 20px;
 }
 
-/* Responsive Adjustments */
 @media (max-width: 768px) {
   .header-centre {
-    flex-direction: row;
-    justify-content: space-between;
+    flex-direction: column;
+    align-items: center;
     width: 100%;
   }
 
-  .navigator {
-    display: none;
-  }
-
-  .header {
-    padding: 10px;
-  }
-
-  .searchbar {
-    width: 100%;
+  .img-container {
+    width: 90%;
+    max-width: 100px;
+    display: flex;
     flex-direction: column;
   }
 
-  .searchbar input[type="text"] {
-    width: 100%;
-    border-radius: 5px;
-    margin-bottom: 10px;
+  .header-Account {
+    font-size: 12px;
+  }
+  .header-text {
+    align-items: center;
+    text-align: center;
+    font-size: medium;
+  }
+  .header-image {
+    width: 50px;
+    height: 50px;
   }
 
-  .searchbutton {
+  .username-text {
+    font-size: 0.75rem;
+    text-align: justify;
+  }
+
+  .header {
+    padding: 15px;
+  }
+
+  .searchbar {
+    align-items: center;
+  }
+  .searchbar .searchbutton {
+    width: 20%;
+    align-items: center;
+    flex-shrink: 1;
+  }
+  .header {
     width: 100%;
-    border-radius: 5px;
-    font-size: 14px;
+  }
+
+  .comment-form {
+    transform: scale(0.9);
+    transform-origin: top left;
   }
 
   .nav-list {
-    display: none;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding-top: 10px;
+  }
+
+  .navigator-item {
+    font-size: 0.75rem;
+    padding: 5px 5px;
   }
 
   .container {
@@ -236,41 +257,6 @@ p {
   }
 }
 
-@media (max-width: 480px) {
-  .header {
-    padding: 10px;
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .header-image {
-    max-width: 100px;
-    height: auto;
-  }
-
-  .header-text {
-    font-size: 1.8rem;
-  }
-
-  .navigator-item {
-    font-size: 1.5rem;
-    padding: 8px 16px;
-  }
-
-  .searchbar input[type="text"] {
-    font-size: 14px;
-  }
-
-  .searchbutton {
-    font-size: 14px;
-  }
-
-  .navigator {
-    display: none;
-  }
-}
-
-/* Item Card and Image Styles */
 .item-card {
   position: relative;
   overflow: hidden;
@@ -301,7 +287,6 @@ p {
   display: block;
 }
 
-/* Container for the article content */
 .article-container {
   display: flex;
   flex-direction: column;
@@ -311,7 +296,6 @@ p {
   margin: 0 auto;
 }
 
-/* Style for the solo image */
 .solo-image {
   max-width: 100%;
   height: auto;
@@ -320,20 +304,17 @@ p {
   padding: 10px;
 }
 
-/* Title styling */
 .title {
   text-align: center;
-  font-size: 2rem;
+  font-size: 1rem;
   margin: 20px 0;
 }
 
-/* Text styling for article details */
 .article-details {
   text-align: center;
   font-size: 1.2rem;
 }
 
-/* Adjustments for the body text */
 .article-body {
   line-height: 1.6;
   font-size: 1rem;
@@ -342,7 +323,6 @@ p {
   max-width: 90%;
 }
 
-/* Comments section styling */
 .comments-section {
   padding: 10px;
 }
@@ -391,7 +371,6 @@ p {
   background-color: rgb(195, 249, 195);
 }
 
-/* Post new comment CSS */
 .comment-form {
   display: flex;
   justify-content: center;
