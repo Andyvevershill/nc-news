@@ -6,12 +6,13 @@ import {
   faThumbsDown,
   faThumbsUp,
 } from "@fortawesome/fontawesome-free-solid";
+import { patchVotes } from "../helpers";
 
 fontawesome.library.add(faHeart, faThumbsUp, faThumbsDown);
 
 const ArticleVoting = ({ articleId, initialVotes }) => {
   const [votes, setVotes] = useState(initialVotes || 0);
-  const [error, setError] = useState(null);
+  const [isError, setIsError] = useState(null);
   const [isVoting, setIsVoting] = useState(false);
 
   const handleVote = (voteChange) => {
@@ -19,24 +20,19 @@ const ArticleVoting = ({ articleId, initialVotes }) => {
     setVotes((prevVotes) => prevVotes + voteChange);
     //disable voting whenn request is in progress
     setIsVoting(true);
-    //send patch request to the backend
-    fetch(
-      `https://project1-be-nc-news.onrender.com/api/articles/${articleId}`,
-      {
-        method: "PATCH",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ inc_votes: voteChange }),
-      }
-    )
-      // if there is an error, set the votes back and send an error to the user
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("failed to update votes");
-        }
+    setIsError(false);
+
+    patchVotes(articleId, voteChange)
+      .then((data) => {
+        const updatedArticle = data.article;
+        console.log("Updated article:", updatedArticle);
+        setVotes(updatedArticle.votes);
       })
       .catch(() => {
         setVotes((prevVotes) => prevVotes - voteChange);
-        setError("Sorry, we couldnt update the votes. Please try again later");
+        setIsError(
+          "Sorry, we couldnt update the votes. Please try again later"
+        );
       })
       // set all the votes back to false regardless of error ot not
       .finally(() => setIsVoting(false));

@@ -229,6 +229,7 @@ p {
   .searchbar .searchbutton {
     width: 20%;
     align-items: center;
+    flex-shrink: 1;
   }
   .header {
     width: 100%;
