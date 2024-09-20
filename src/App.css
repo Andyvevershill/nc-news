@@ -28,6 +28,10 @@ p {
   font-family: "monospace", serif;
 }
 
+.sort-by,
+.drop-down {
+  font-family: "monospace", serif;
+}
 .image {
   max-width: 90%;
   height: auto;
@@ -59,7 +63,7 @@ p {
 }
 
 .header-text {
-  font-size: 2.5rem;
+  font-size: 1.5rem;
   color: white;
 }
 
@@ -108,7 +112,6 @@ p {
   justify-content: space-between;
   padding: 0;
   margin: 0;
-  padding-top: 20px;
 }
 
 .form {
@@ -128,7 +131,7 @@ p {
   padding: 10px 20px;
   transition: color 0.3s ease, background-color 0.3s ease;
   border-radius: 5px;
-  font-size: 2rem;
+  font-size: 1rem;
 }
 
 .navigator-item:hover {
@@ -207,7 +210,7 @@ p {
   .header-text {
     align-items: center;
     text-align: center;
-    font-size: medium;
+    font-size: rem;
   }
   .header-image {
     width: 50px;
@@ -244,7 +247,6 @@ p {
     display: flex;
     flex-direction: row;
     align-items: center;
-    padding-top: 10px;
   }
 
   .navigator-item {
@@ -302,11 +304,12 @@ p {
   border: solid black 5px;
   border-radius: 15%;
   padding: 10px;
+  width: 500px;
 }
 
 .title {
   text-align: center;
-  font-size: 1rem;
+  font-size: 1.5rem;
   margin: 20px 0;
 }
 

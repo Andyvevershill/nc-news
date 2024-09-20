@@ -59,13 +59,18 @@ const ItemContainer = ({ search = "", articles, setArticles }) => {
     <>
       <div className="sort-controls">
         <label htmlFor="sort">Sort by: </label>
-        <select id="sort" value={sort_by} onChange={handleSortChange}>
+        <select
+          id="sort"
+          value={sort_by}
+          onChange={handleSortChange}
+          className="drop-down"
+        >
           <option value="created_at">Date</option>
           <option value="votes">Votes</option>
           <option value="comment_count">Comment Count</option>
         </select>
 
-        <button onClick={handleOrderChange}>
+        <button onClick={handleOrderChange} className="sort-by">
           {order === "desc" ? "Descending" : "Ascending"}
         </button>
       </div>
