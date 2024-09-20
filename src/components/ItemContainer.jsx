@@ -24,7 +24,6 @@ const ItemContainer = ({ search = "", articles, setArticles }) => {
         })
         .catch(() => {
           setIsError(true);
-          console.error("Error fetching articles");
         })
         .finally(() => setIsLoading(false));
     }
@@ -50,7 +49,11 @@ const ItemContainer = ({ search = "", articles, setArticles }) => {
   }, [articles, search]);
 
   if (isLoading) return <p>Loading articles...</p>;
-  if (isError) return <p>Error fetching article details</p>;
+  if (isError) return <p>Error fetching article details.</p>;
+
+  if (filteredArticles.length === 0 && search) {
+    return <p>Sorry, theres nothing that matches your search: "{search}"</p>;
+  }
 
   return (
     <>

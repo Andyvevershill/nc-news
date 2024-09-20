@@ -8,6 +8,9 @@ const TopicPage = ({ setArticles, articles }) => {
   const [isError, setIsError] = useState(false);
   const { topic } = useParams();
 
+  const [sort_by, setSortBy] = useState("created_at");
+  const [order, setOrder] = useState("desc");
+
   useEffect(() => {
     setIsLoading(true);
     setIsError(false);
@@ -19,7 +22,7 @@ const TopicPage = ({ setArticles, articles }) => {
   }, [topic, setArticles]);
 
   if (isError) {
-    return <p>Error fetching articles on {topic}</p>;
+    return <p>Error fetching articles on {topic}. This topic does not exist</p>;
   }
   if (isLoading) {
     return <p>Loading articles on {topic}</p>;
@@ -28,7 +31,12 @@ const TopicPage = ({ setArticles, articles }) => {
   return (
     <section className="topic-page">
       <h2>Here are the articles on {topic}:</h2>
-      <ItemContainer articles={articles} />
+      <ItemContainer
+        articles={articles}
+        setArticles={setArticles}
+        sort_by={sort_by}
+        order={order}
+      />
     </section>
   );
 };

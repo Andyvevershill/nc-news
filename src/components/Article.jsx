@@ -20,6 +20,9 @@ const Article = () => {
       .finally(() => setIsLoading(false));
   }, [article_id]);
 
+  if (isLoading) return <p>Loading article...</p>;
+  if (isError) return <p>Article does not exist</p>;
+
   const dateString = moment(article.created_at);
 
   return (
