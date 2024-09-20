@@ -22,7 +22,7 @@ const Header = ({ setSearch }) => {
         <Navigator className="navigator" />
       </div>
 
-      <Link to="/users/butter_bridge">
+      <Link to="/users/grumpy19">
         <Account className="header-Account" />
       </Link>
     </header>

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import ItemContainer from "./ItemContainer";
 import { useParams } from "react-router-dom";
+import { fetchArticlesByTopic } from "../helpers";
 
 const TopicPage = ({ setArticles, articles }) => {
   const [isLoading, setIsLoading] = useState(false);
@@ -11,23 +12,10 @@ const TopicPage = ({ setArticles, articles }) => {
     setIsLoading(true);
     setIsError(false);
 
-    fetch(
-      `https://project1-be-nc-news.onrender.com/api/articles?topic=${topic}`
-    )
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        return response.json();
-      })
-      .then((data) => {
-        setIsLoading(false);
-        setArticles(data.articles);
-      })
-      .catch((err) => {
-        setIsLoading(false);
-        setIsError(true);
-      });
+    fetchArticlesByTopic(topic)
+      .then((data) => setArticles(data.articles))
+      .catch(() => setIsError(true))
+      .finally(() => setIsLoading(false));
   }, [topic, setArticles]);
 
   if (isError) {

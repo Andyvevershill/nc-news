@@ -14,12 +14,12 @@ const CommentCard = ({ comment, onDelete }) => {
         {moment(comment.created_at).format("DD/MM/YYYY")}
       </p>
       <p>{comment.body}</p>
-      <p>
+      <div>
         <ArticleVoting
           articleId={comment.article_id}
           initialVotes={comment.votes}
         />
-      </p>
+      </div>
       {comment.author === "grumpy19" && (
         <button onClick={() => onDelete(comment.comment_id)}>Delete</button>
       )}

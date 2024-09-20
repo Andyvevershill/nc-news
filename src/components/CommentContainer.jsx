@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import CommentCard from "./CommentCard";
 import PostComment from "./PostComment";
+import { fetchAllComments, deleteCommentById } from "../helpers";
 
 const CommentContainer = ({ article_id }) => {
   const [isLoading, setIsLoading] = useState(false);
@@ -8,17 +9,13 @@ const CommentContainer = ({ article_id }) => {
   const [comments, setComments] = useState([]);
 
   useEffect(() => {
-    fetch(
-      `https://project1-be-nc-news.onrender.com/api/articles/${article_id}/comments`
-    )
-      .then((response) => response.json())
-      .then((response) => {
-        setComments(response.comments);
-      })
-      .catch(() => {
-        setIsError(true);
-        setIsLoading(false);
-      });
+    setIsLoading(true);
+    setIsError(false);
+
+    fetchAllComments(article_id)
+      .then((newComment) => setComments(newComment))
+      .catch(() => setIsError(true))
+      .finally(() => setIsLoading(false));
   }, [article_id]);
 
   const addNewComment = (newComment) => {
@@ -26,16 +23,11 @@ const CommentContainer = ({ article_id }) => {
   };
 
   const handleDeleteComment = (commentId) => {
-    fetch(
-      `https://project1-be-nc-news.onrender.com/api/comments/${commentId}`,
-      { method: "DELETE" }
-    ).then((response) => {
-      if (response.status === 204) {
+    deleteCommentById(commentId).then((success) => {
+      if (success) {
         setComments((prevComments) =>
           prevComments.filter((comment) => comment.comment_id !== commentId)
         );
-      } else {
-        throw new Error("failed to delete comment, try again later");
       }
     });
   };
