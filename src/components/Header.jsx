@@ -3,7 +3,6 @@ import SearchBar from "./SearchBar";
 import Account from "./Account";
 import Navigator from "./Navigator";
 import { Link } from "react-router-dom";
-import { useState } from "react";
 import fontawesome from "@fortawesome/fontawesome";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faNewspaper } from "@fortawesome/fontawesome-free-solid";
@@ -18,6 +17,7 @@ const Header = ({ setSearch }) => {
       </Link>
 
       <div className="header-centre">
+        <h1 className="header-text">Welcome to NC News</h1>
         <SearchBar setSearch={setSearch} />
         <Navigator className="navigator" />
       </div>
