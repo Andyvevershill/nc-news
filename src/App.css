@@ -29,7 +29,8 @@ p {
 }
 
 .sort-by,
-.drop-down {
+.drop-down,
+.post-button {
   font-family: "monospace", serif;
 }
 .image {
@@ -403,7 +404,7 @@ form {
 
 .post-button {
   display: block;
-  background-color: #007bff;
+  background-color: rgb(143, 4, 4);
   color: white;
   border: none;
   border-radius: 5px;
