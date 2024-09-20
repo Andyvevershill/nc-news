@@ -5,7 +5,7 @@ const ItemCard = ({ article }) => {
   const source = article.article_img_url;
 
   return (
-    <li className="item-card">
+    <ul className="item-card">
       <div className="image-container">
         <Link to={path}>
           <img src={source} className="image item-link" />
@@ -22,7 +22,7 @@ const ItemCard = ({ article }) => {
       <Link to={path}>
         <button className="hover-info">Click here for more info</button>
       </Link>
-    </li>
+    </ul>
   );
 };
 

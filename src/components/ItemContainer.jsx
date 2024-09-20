@@ -1,29 +1,45 @@
 import ItemCard from "./ItemCard";
 import { useState, useEffect, useMemo } from "react";
+import { fetchAllArticles } from "../helpers";
+import { useLocation, useSearchParams } from "react-router-dom";
 
 const ItemContainer = ({ search = "", articles, setArticles }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const location = useLocation();
+
+  //set default sortby to created at, set default order to desc
+  const sort_by = searchParams.get("sort_by") || "created_at";
+  const order = searchParams.get("order") || "desc";
 
   useEffect(() => {
-    if (articles.length === 0) {
+    if (location.pathname === "/") {
       setIsLoading(true);
       setIsError(false);
 
-      fetch(`https://project1-be-nc-news.onrender.com/api/articles`)
-        .then((response) => response.json())
-        .then((data) => {
-          setIsLoading(false);
-          setArticles(data.articles); // Update the articles state with fetched data
+      fetchAllArticles(sort_by, order)
+        .then((newArticles) => {
+          setArticles(newArticles);
         })
         .catch(() => {
-          setIsLoading(false);
           setIsError(true);
-        });
+          console.error("Error fetching articles");
+        })
+        .finally(() => setIsLoading(false));
     }
-  }, [setArticles, articles.length]);
+  }, [setArticles, location.pathname, sort_by, order]);
 
-  //api is not set up to search for any keyword so have done on the frontend
+  const handleSortChange = (event) => {
+    const newSort = event.target.value;
+    setSearchParams({ sort_by: newSort, order });
+  };
+
+  const handleOrderChange = () => {
+    const newOrder = order === "desc" ? "asc" : "desc";
+    setSearchParams({ sort_by, order: newOrder });
+  };
+
   const filteredArticles = useMemo(() => {
     const upperCaseSearch = search.toUpperCase();
     return articles?.filter(
@@ -37,11 +53,25 @@ const ItemContainer = ({ search = "", articles, setArticles }) => {
   if (isError) return <p>Error fetching article details</p>;
 
   return (
-    <div className="container">
-      {filteredArticles.map((article) => (
-        <ItemCard article={article} key={article.article_id} />
-      ))}
-    </div>
+    <>
+      <div className="sort-controls">
+        <label htmlFor="sort">Sort by: </label>
+        <select id="sort" value={sort_by} onChange={handleSortChange}>
+          <option value="created_at">Date</option>
+          <option value="votes">Votes</option>
+          <option value="comment_count">Comment Count</option>
+        </select>
+
+        <button onClick={handleOrderChange}>
+          {order === "desc" ? "Descending" : "Ascending"}
+        </button>
+      </div>
+      <div className="container">
+        {filteredArticles.map((article) => (
+          <ItemCard article={article} key={article.article_id} />
+        ))}
+      </div>
+    </>
   );
 };
 

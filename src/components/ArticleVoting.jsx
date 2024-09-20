@@ -43,16 +43,19 @@ const ArticleVoting = ({ articleId, initialVotes }) => {
   };
 
   return (
-    <section>
+    <div>
       <FontAwesomeIcon className="votes" icon="fa-solid fa-heart" />
       {votes}
-      <button onClick={() => handleVote(1)} disabled={isVoting}>
-        <FontAwesomeIcon className="votes-up" icon="fa-thumbs-up" />
-      </button>
-      <button onClick={() => handleVote(-1)} disabled={isVoting}>
-        <FontAwesomeIcon className="votes-down" icon="fa-thumbs-down" />
-      </button>
-    </section>
+      <div>
+        <button onClick={() => handleVote(1)} disabled={isVoting}>
+          <FontAwesomeIcon className="votes-up" icon="fa-thumbs-up" />
+        </button>
+
+        <button onClick={() => handleVote(-1)} disabled={isVoting}>
+          <FontAwesomeIcon className="votes-down" icon="fa-thumbs-down" />
+        </button>
+      </div>
+    </div>
   );
 };
 
